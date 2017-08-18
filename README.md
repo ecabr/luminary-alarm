@@ -24,7 +24,6 @@ Create `data/authentication.json`:
     "secret": <access token secret>
   }
 }
-
 ```
 
 Execute:
