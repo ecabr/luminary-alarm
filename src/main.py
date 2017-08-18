@@ -16,5 +16,7 @@ api = TwitterAPI( consumer['key'],
 r = api.request('search/tweets', {'q': 'cisterna iluminacion'})
 
 for item in r.get_iterator():
-    print('User:', item['user']['screen_name'])
-    print(' ->', item['text'])
+    print('->', item['user']['screen_name'], item['created_at'])
+    print('   "' + item['text'] + '"')
+    # for label in item:
+        # print(label)
