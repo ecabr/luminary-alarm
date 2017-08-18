@@ -29,5 +29,5 @@ Create `data/authentication.json`:
 Execute:
 
 ```bash
-$ src/main.py
+$ ./luminary-alarm.sh
 ```
