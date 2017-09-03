@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-./src/main.py
+./src/main.py > output.txt
