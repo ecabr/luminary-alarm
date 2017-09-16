@@ -10,6 +10,10 @@ consumer = data['consumer']
 access_token = data['access_token']
 f.close()
 
+f = open('data/streets.json', 'r')
+streets = json.load(f)
+f.close()
+
 api = TwitterAPI( consumer['key'],
                   consumer['secret'],
                   access_token['key'],
@@ -19,6 +23,7 @@ today = date.today()
 delta = timedelta(days=7)
 weeks = 1
 days = [today]
+info = []
 
 for i in range(weeks):
     days.append(days[-1] - delta)
@@ -29,5 +34,20 @@ for day in days:
             'until': day})
 
     for item in r.get_iterator():
-        print('->', item['user']['screen_name'], item['created_at'])
-        print('   "' + item['text'] + '"')
+        street_list = []
+
+        for street in streets:
+            index = item['text'].upper().find(street)
+            if index > -1:
+                street_list.append(street)
+
+        if len(street_list) > 0:
+            info.append(dict(
+                datetime = item['created_at'],
+                streets  = street_list
+            ))
+
+        # print('->', item['user']['screen_name'], item['created_at'])
+        # print('   "' + item['text'] + '"')
+
+print(info)
